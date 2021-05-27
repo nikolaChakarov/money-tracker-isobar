@@ -62,7 +62,11 @@ router.post('/register', [
             throw token;
         }
 
-        res.status(200).json(token);
+        res.status(200).json({
+            id: dbUserCreateRes._id,
+            username: dbUserCreateRes.username,
+            token
+        });
 
     } catch (err) {
         console.error(err);
@@ -119,8 +123,12 @@ router.post('/login', [
             throw token;
         }
 
-        res.status(200).json(token);
-        
+        res.status(200).json({
+            id: dbUserCreateRes._id,
+            username: dbUserCreateRes.username,
+            token
+        });
+
     } catch (err) {
         console.error(err);
         res.status(400).json({ msg: err });
