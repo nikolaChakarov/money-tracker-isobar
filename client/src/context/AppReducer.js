@@ -5,18 +5,18 @@ const AppReducer = (state, action) => {
         case 'REGISTER':
             return {
                 ...state,
-                user: { ...action.payload }
+                username: action.payload
             };
         case 'LOGIN':
             return {
                 ...state,
-                user: { ...action.payload }
+                username: action.payload
             };
         case 'LOGOUT':
             return {
                 ...state,
-                user: {}
-            }
+                username: null
+            };
 
         default:
             return state;

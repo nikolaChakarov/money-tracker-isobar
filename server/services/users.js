@@ -124,8 +124,8 @@ router.post('/login', [
         }
 
         res.status(200).json({
-            id: dbUserCreateRes._id,
-            username: dbUserCreateRes.username,
+            id: user._id,
+            username: user.username,
             token
         });
 

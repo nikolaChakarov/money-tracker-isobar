@@ -1,11 +1,11 @@
 import { createContext, useReducer } from 'react';
 import AppReducer from './AppReducer';
 
+import setLocalStorage from '../utils/setLocalStorage';
+
 const initialState = {
-    user: {},
-    payments: [],
-    errors: []
-}
+    username: localStorage.getItem('username')
+};
 
 export const GlobalContext = createContext(initialState);
 
@@ -25,15 +25,17 @@ export const GlobalProvider = ({ children }) => {
                 body: JSON.stringify(user)
             }))).json();
 
-            if (!dbRegisterUserRes) {
+            if (dbRegisterUserRes.msg) {
                 throw dbRegisterUserRes;
             }
 
             console.log(dbRegisterUserRes);
 
+            setLocalStorage(dbRegisterUserRes);
+
             dispatch({
                 type: 'REGISTER',
-                payload: dbRegisterUserRes
+                payload: dbRegisterUserRes.username
             });
 
         } catch (err) {
@@ -42,10 +44,52 @@ export const GlobalProvider = ({ children }) => {
 
     }
 
+    const loginUser = async (user) => {
+
+        try {
+
+            const dbLoginUserRes = await (await (fetch('http://localhost:5000/api/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(user)
+            }))).json();
+
+            if (dbLoginUserRes.msg) {
+                throw dbLoginUserRes;
+            }
+
+            console.log(dbLoginUserRes);
+
+            setLocalStorage(dbLoginUserRes);
+
+            dispatch({
+                type: 'LOGIN',
+                payload: dbLoginUserRes.username
+            });
+
+        } catch (err) {
+            console.error(err);
+        }
+
+    }
+
+    const logoutUser = () => {
+        localStorage.clear();
+
+        dispatch({
+            type: 'LOGOUT',
+        })
+    }
+
     return (
         <GlobalContext.Provider value={{
-            user: state.user,
-            registerUser
+            state,
+            dispatch,
+            registerUser,
+            loginUser,
+            logoutUser
         }}>
             {children}
         </GlobalContext.Provider>

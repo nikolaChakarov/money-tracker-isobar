@@ -1,17 +1,23 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { GlobalContext } from '../../context/GlobalState';
 
-const Register = ({ history }) => {
 
-    const { registerUser } = useContext(GlobalContext);
+const Login = ({ history }) => {
+
+    const { loginUser, state } = useContext(GlobalContext);
 
     const [userData, setUserData] = useState({
         username: '',
-        password: '',
-        password2: ''
+        password: ''
     });
 
-    const { username, password, password2 } = userData;
+    const { username, password } = userData;
+
+    useEffect(() => {
+        if (state.username) {
+            history.push('/');
+        }
+    }, [state.username]);
 
     const onInputChanged = (e) => {
 
@@ -25,21 +31,16 @@ const Register = ({ history }) => {
     const onFormSubmit = (e) => {
         e.preventDefault();
 
-        if (username === '') {
-            throw 'Please, enter your username';
-        }
-
-        registerUser(userData);
-
+        loginUser(userData);
     }
 
 
     return (
-        <section className="register-section">
-            <h2>Register Form</h2>
+        <section className="login-section">
+            <h2>Login Form</h2>
 
             <form
-                className="form register-form"
+                className="form login-form"
                 onSubmit={onFormSubmit}
             >
                 <div className="form-element">
@@ -64,22 +65,13 @@ const Register = ({ history }) => {
                     />
                 </div>
 
-                <div className="form-element">
-                    <label htmlFor="password2">Repeat Password</label>
-                    <input
-                        type="text"
-                        name="password2"
-                        id="password2"
-                        onChange={onInputChanged}
-                        value={password2}
-                    />
-                </div>
-
-                <button type="submit" className="btn register-btn">Register</button>
+                <button type="submit" className="btn login-btn">Login</button>
 
             </form>
+
+
         </section>
     )
 }
 
-export default Register;
+export default Login;
