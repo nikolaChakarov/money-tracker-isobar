@@ -27,9 +27,9 @@ const Navigation = () => {
 const UserIsLoggedIn = ({ username }) => {
     return (
         <>
-            <li>Welcome {username}</li>
             <li><Link to="/transactions">Transactions</Link></li>
             <li><Link to="/logout">Logout</Link></li>
+            <li className="user-name-li">Welcome <span>{username}</span></li>
         </>
     )
 }

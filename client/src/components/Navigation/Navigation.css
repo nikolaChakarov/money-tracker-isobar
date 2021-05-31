@@ -22,3 +22,12 @@ p.logo {
 .main-navigation ul li a {
     color: #fff;
 }
+
+.user-name-li {
+    color: #fff;
+}
+
+.user-name-li span {
+    font-weight: bold;
+    font-variant: small-caps;
+}

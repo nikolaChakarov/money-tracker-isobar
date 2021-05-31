@@ -5,7 +5,7 @@ const AddTransaction = () => {
 
     const [amount, setAmount] = useState(0);
 
-    const { getUserTransactions } = useContext(GlobalContext);
+    const { dispatch } = useContext(GlobalContext);
 
     const onAmountChange = (e) => {
         setAmount(e.target.value);
@@ -30,7 +30,11 @@ const AddTransaction = () => {
                 throw dbAddTransactionRes;
             }
 
-            getUserTransactions();
+            dispatch({
+                type: 'GET_USER_TRANSACTIONS#INIT'
+            });
+
+            // getUserTransactions();
         } catch (err) {
             console.error(err);
         }

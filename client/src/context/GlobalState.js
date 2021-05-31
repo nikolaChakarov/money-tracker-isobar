@@ -5,7 +5,8 @@ import setLocalStorage from '../utils/setLocalStorage';
 
 const initialState = {
     username: localStorage.getItem('username'),
-    userTransactions: JSON.parse(localStorage.getItem('userTransactions')) || []
+    userTransactions: [],
+    transactionsInit: false
 };
 
 export const GlobalContext = createContext(initialState);
@@ -96,8 +97,6 @@ export const GlobalProvider = ({ children }) => {
             if (!userTransactions) {
                 throw userTransactions;
             }
-
-            localStorage.setItem('userTransactions', JSON.stringify(userTransactions));
 
             dispatch({
                 type: 'GET_USER_TRANSACTIONS',

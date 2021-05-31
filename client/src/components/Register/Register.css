@@ -10,10 +10,6 @@
     margin-bottom: 1rem;
 }
 
-.register-section form {
-
-}
-
 .register-section form .form-element {
     display: flex;
     flex-direction: column;

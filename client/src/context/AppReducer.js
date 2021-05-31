@@ -20,8 +20,14 @@ const AppReducer = (state, action) => {
         case 'GET_USER_TRANSACTIONS':
             return {
                 ...state,
-                userTransactions: [...action.payload]
+                userTransactions: [...action.payload],
+                transactionsInit: true
             };
+        case 'GET_USER_TRANSACTIONS#INIT':
+            return {
+                ...state,
+                transactionsInit: false
+            }
 
         default:
             return state;
