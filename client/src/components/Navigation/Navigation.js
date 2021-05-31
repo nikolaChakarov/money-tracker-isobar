@@ -25,7 +25,7 @@ const UserIsLoggedIn = ({ username }) => {
     return (
         <>
             <li>Welcome {username}</li>
-            <li><Link to="/transactions">Trasactions</Link></li>
+            <li><Link to="/transactions">Transactions</Link></li>
             <li><Link to="/logout">Logout</Link></li>
         </>
     )
