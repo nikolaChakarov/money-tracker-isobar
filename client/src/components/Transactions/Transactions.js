@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { GlobalContext } from '../../context/GlobalState';
 
+import Transaction from '../Transaction/Transaction';
 import AddTransaction from '../AddTransaction/AddTransaction';
 
 import './Transactions.css';
@@ -13,7 +14,7 @@ const Transactions = () => {
     useEffect(() => {
         //  console.log('useEffect from Transactions.js');
 
-        if (!state.transactionInit) {
+        if (!state.transactionsInit) {
             getUserTransactions();
         }
 
@@ -24,10 +25,10 @@ const Transactions = () => {
 
 
     const calcCurrentBalace = () => {
-        console.log(state.userTransactions);
+        //console.log(state.userTransactions);
         // const test = JSON.parse(localStorage.getItem('userTransactions')) || [];
         const res = state.userTransactions.reduce((acc, curr) => {
-            acc += curr.transaction;
+            acc += curr.amount;
             return acc;
         }, 0);
 
@@ -39,7 +40,7 @@ const Transactions = () => {
             <h1>Your Balance: {balance}</h1>
             <h3>History of payments</h3>
             {state.userTransactions.map(el => (
-                <li key={el._id}>{el.transaction}</li>
+                <Transaction key={el._id} {...el} />
             ))}
 
             <AddTransaction />

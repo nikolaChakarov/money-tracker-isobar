@@ -1,14 +1,22 @@
 import { useState, useContext } from 'react';
 import { GlobalContext } from '../../context/GlobalState';
 
+import './AddTransaction.css';
+
 const AddTransaction = () => {
 
-    const [amount, setAmount] = useState(0);
+    const [info, setInfo] = useState({
+        name: '',
+        amount: 0
+    });
 
     const { dispatch } = useContext(GlobalContext);
 
-    const onAmountChange = (e) => {
-        setAmount(e.target.value);
+    const onInputChange = (e) => {
+        setInfo({
+            ...info,
+            [e.target.name]: e.target.value
+        });
     }
 
     const onFormSubmit = async (e) => {
@@ -22,7 +30,7 @@ const AddTransaction = () => {
                     'x-auth-token': localStorage.getItem('token')
                 },
                 body: JSON.stringify({
-                    transaction: amount
+                    ...info
                 })
             }))).json();
 
@@ -32,6 +40,11 @@ const AddTransaction = () => {
 
             dispatch({
                 type: 'GET_USER_TRANSACTIONS#INIT'
+            });
+
+            setInfo({
+                name: '',
+                amount: 0
             });
 
             // getUserTransactions();
@@ -48,15 +61,29 @@ const AddTransaction = () => {
                 className="add-form"
                 onSubmit={onFormSubmit}
             >
-                <label htmlFor="amount">Enter Your Amount:</label>
-                <input
-                    type="number"
-                    name="amount"
-                    value={amount}
-                    onChange={onAmountChange}
-                />
+                <div className="form-element">
+                    <label htmlFor="name">Type Of Transaction:</label>
+                    <input
+                        className="input-value"
+                        type="text"
+                        name="name"
+                        value={info.name}
+                        onChange={onInputChange}
+                    />
+                </div>
 
-                <input type="submit" value="Add Transaction" />
+                <div className="form-element">
+                    <label htmlFor="amount">Enter Your Amount:</label>
+                    <input
+                        className="input-value"
+                        type="number"
+                        name="amount"
+                        value={info.amount}
+                        onChange={onInputChange}
+                    />
+                </div>
+
+                <input type="submit" value="Add Transaction" className="btn btn-add" />
             </form>
         </section>
     )

@@ -1,0 +1,42 @@
+.add-transaction-section {
+    position: absolute;
+    background-color: #fff;
+    top: 40px;
+    right: 40px;
+    color: var(--main-color);
+    border-radius: 5px;
+    box-shadow: 0 3px 10px 3px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    height: 30vh;
+}
+
+.add-transaction-section form {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    align-items: center;
+    justify-content: space-around;
+    flex: 1;
+}
+
+.add-transaction-section .form-element {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-transaction-section .form-element label {
+    color: #444;
+}
+
+.add-transaction-section h2 {
+    padding: 10px;
+    border-bottom: 1px groove #DF501A;
+}
+
+.add-transaction-section input.input-value {
+    padding: 5px;
+    color: var(--main-color);
+    text-align: right;
+    border: 1px groove #fff;
+}

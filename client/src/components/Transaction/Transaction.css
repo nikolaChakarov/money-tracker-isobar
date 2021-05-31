@@ -1,0 +1,14 @@
+.list-item { 
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    margin-bottom: 1rem;
+}
+
+.list-item.positive {
+    border-right: 5px solid green;
+}
+
+.list-item.negative {
+    border-right: 5px solid red;
+}

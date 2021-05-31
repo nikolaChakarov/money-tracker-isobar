@@ -7,7 +7,11 @@ const paymentSchema = mongoose.Schema({
         ref: 'user'
     },
 
-    transaction: {
+    name: {
+        type: String
+    },
+
+    amount: {
         type: Number
     },
 

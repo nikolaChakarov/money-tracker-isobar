@@ -30,7 +30,8 @@ router.post('/add', isAuth, async (req, res) => {
         const user = await User.findById(req.user.id);
 
         // Make transaction
-        const transaction = new Payment({ transaction: req.body.transaction });
+        const { name, amount } = req.body;
+        const transaction = new Payment({ name, amount });
         await transaction.save();
 
         // Add currentTransacion to currentUser
