@@ -17,6 +17,11 @@ const AppReducer = (state, action) => {
                 ...state,
                 username: null
             };
+        case 'GET_USER_TRANSACTIONS':
+            return {
+                ...state,
+                userTransactions: [...action.payload]
+            };
 
         default:
             return state;

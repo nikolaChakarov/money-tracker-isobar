@@ -6,6 +6,20 @@ const User = require('../models/User');
 
 const isAuth = require('../middlewares/isAuth');
 
+// Get current user transactions
+router.get('/', isAuth, async (req, res) => {
+
+    try {
+        const user = await User.findById(req.user.id).populate('payments');
+
+        res.status(200).json(user.payments);
+
+    } catch (err) {
+        console.error(err);
+        res.status(400).json({ msg: err });
+    }
+});
+
 // Add transaction
 router.post('/add', isAuth, async (req, res) => {
 

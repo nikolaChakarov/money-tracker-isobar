@@ -1,0 +1,12 @@
+footer {
+    text-align: center;
+    margin-top: 1rem;
+    border-top: 1px groove #fff;
+    padding-top: 1rem;
+}
+
+footer span {
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--main-color)
+}

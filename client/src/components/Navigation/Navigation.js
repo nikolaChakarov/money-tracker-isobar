@@ -2,6 +2,8 @@ import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { GlobalContext } from '../../context/GlobalState';
 
+import './Navigation.css';
+
 
 const Navigation = () => {
 
@@ -12,7 +14,8 @@ const Navigation = () => {
     }, [state.username]);
 
     return (
-        <nav>
+        <nav className="main-navigation">
+            <p className="logo">LoGo</p>
             <ul>
                 <li><Link to="/">Home</Link></li>
                 {state.username ? <UserIsLoggedIn username={state.username} /> : <UserNotLoggedIn />}

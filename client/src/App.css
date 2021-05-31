@@ -1,0 +1,41 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --main-color: #DF501A;
+}
+
+html {
+    font-size: 65.2%;
+}
+
+body {
+    box-sizing: border-box;
+    font-size: 1.6rem;
+    color: #444;
+}
+
+ul li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.btn {
+    background-color: var(--main-color);
+    color: #fff;
+    padding: 5px 10px;
+    border: 1px groove #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #fff;
+    color: var(--main-color);
+}
+

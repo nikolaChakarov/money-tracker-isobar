@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { GlobalContext } from '../../context/GlobalState';
 
+import './Register.css';
+
 const Register = ({ history }) => {
 
     const { registerUser } = useContext(GlobalContext);

@@ -4,7 +4,8 @@ import AppReducer from './AppReducer';
 import setLocalStorage from '../utils/setLocalStorage';
 
 const initialState = {
-    username: localStorage.getItem('username')
+    username: localStorage.getItem('username'),
+    userTransactions: JSON.parse(localStorage.getItem('userTransactions')) || []
 };
 
 export const GlobalContext = createContext(initialState);
@@ -60,8 +61,6 @@ export const GlobalProvider = ({ children }) => {
                 throw dbLoginUserRes;
             }
 
-            console.log(dbLoginUserRes);
-
             setLocalStorage(dbLoginUserRes);
 
             dispatch({
@@ -83,13 +82,44 @@ export const GlobalProvider = ({ children }) => {
         })
     }
 
+    const getUserTransactions = async () => {
+
+        try {
+
+            const userTransactions = await (await (fetch('http://localhost:5000/api/payments', {
+                method: 'GET',
+                headers: {
+                    'x-auth-token': localStorage.getItem('token')
+                }
+            }))).json();
+
+            if (!userTransactions) {
+                throw userTransactions;
+            }
+
+            localStorage.setItem('userTransactions', JSON.stringify(userTransactions));
+
+            dispatch({
+                type: 'GET_USER_TRANSACTIONS',
+                payload: userTransactions
+            });
+
+
+        } catch (err) {
+            console.error(err);
+        }
+
+    }
+
     return (
         <GlobalContext.Provider value={{
             state,
             dispatch,
             registerUser,
             loginUser,
-            logoutUser
+            logoutUser,
+
+            getUserTransactions
         }}>
             {children}
         </GlobalContext.Provider>

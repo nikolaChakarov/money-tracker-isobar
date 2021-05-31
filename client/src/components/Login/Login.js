@@ -1,6 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { GlobalContext } from '../../context/GlobalState';
 
+import './Login.css';
+
 
 const Login = ({ history }) => {
 

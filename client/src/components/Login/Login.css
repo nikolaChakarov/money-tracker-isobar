@@ -1,0 +1,31 @@
+.login-section {
+    width: 50vw;
+    padding: 2rem;
+    margin: 2rem auto;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.login-section h2 {
+    border-bottom: 1px groove #fff;
+    margin-bottom: 1rem;
+}
+
+.login-section form {
+
+}
+
+.login-section form .form-element {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-section form input {
+    margin-bottom: 1rem;
+    padding: 5px;
+    color: var(--main-color);
+    border: 1px groove #fff;
+}
+
+.login-section form input:focus {
+    outline: none;
+}
