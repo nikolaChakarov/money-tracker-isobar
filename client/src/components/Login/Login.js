@@ -3,6 +3,8 @@ import { GlobalContext } from '../../context/GlobalState';
 
 import IsNotAuth from '../../middlewares/IsNotAuth';
 
+import Err from '../Err/Err';
+
 
 import './Login.css';
 
@@ -17,6 +19,9 @@ const Login = ({ history }) => {
     });
 
     const { username, password } = userData;
+
+    const [err, setErr] = useState('');
+
 
     useEffect(() => {
         if (state.username) {
@@ -36,9 +41,22 @@ const Login = ({ history }) => {
     const onFormSubmit = (e) => {
         e.preventDefault();
 
+        setErr('');
+
+        if (username === '') {
+            setErr('Please, enter your username');
+            return;
+        }
+
+        if (password === '') {
+            setErr('Please, enter your password');
+            return;
+        }
+
         loginUser(userData);
     }
 
+    const isError = err ? <Err msg={err} setErr={setErr} /> : null;
 
     return (
         <section className="login-section">
@@ -78,6 +96,7 @@ const Login = ({ history }) => {
 
             </form>
 
+            {isError}
 
         </section>
     )

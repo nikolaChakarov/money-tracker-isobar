@@ -3,6 +3,8 @@ import { GlobalContext } from '../../context/GlobalState';
 
 import IsNotAuth from '../../middlewares/IsNotAuth';
 
+import Err from '../Err/Err';
+
 import './Register.css';
 
 const Register = ({ history }) => {
@@ -15,6 +17,8 @@ const Register = ({ history }) => {
         password2: ''
     });
 
+    const [err, setErr] = useState('');
+
 
     const { username, password, password2 } = userData;
 
@@ -24,7 +28,7 @@ const Register = ({ history }) => {
             history.push('/transactions');
         }
 
-    }, [state.username]);
+    }, [state.username, err]);
 
     const onInputChanged = (e) => {
 
@@ -38,13 +42,28 @@ const Register = ({ history }) => {
     const onFormSubmit = (e) => {
         e.preventDefault();
 
+        setErr('');
+
+
         if (username === '') {
-            throw 'Please, enter your username';
+            setErr('Please, enter your username');
+            return;
+        }
+
+        if (password === '') {
+            setErr('Please, enter your password');
+            return;
+        }
+
+        if (password !== password2) {
+            setErr('Password is not the same');
+            return;
         }
 
         registerUser(userData);
     }
 
+    const isError = err ? <Err msg={err} setErr={setErr} /> : null;
 
     return (
         <section className="register-section">
@@ -95,7 +114,7 @@ const Register = ({ history }) => {
 
             </form>
 
-
+            {isError}
         </section>
     )
 }
