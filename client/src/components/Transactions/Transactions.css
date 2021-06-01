@@ -13,11 +13,11 @@
 
 .transactions h3 {
     font-family: cursive;
+    margin: 2rem 0;
 }
 
 .transactions li {
     list-style: none;
-
     border-bottom: 1px groove #fff;
     padding: 5px;
 }

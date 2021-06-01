@@ -1,9 +1,11 @@
 .list-item { 
     display: flex;
+    position: relative;
     justify-content: space-between;
     width: 50%;
     margin-bottom: 1rem;
 }
+
 
 .list-item.positive {
     border-right: 5px solid green;
@@ -11,4 +13,23 @@
 
 .list-item.negative {
     border-right: 5px solid red;
+}
+
+.list-item .remove-list-item {
+    position: absolute;
+    background-color: red;
+    color: #fff;
+    padding: 5px 7px;
+    top: 0;
+    left: -23px;
+    transition: all 0.3s;
+    opacity: 0;
+}
+
+.list-item:hover .remove-list-item {
+    opacity: 1;
+}
+
+.list-item .remove-list-item:hover {
+    cursor: pointer;
 }

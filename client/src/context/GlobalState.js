@@ -110,6 +110,27 @@ export const GlobalProvider = ({ children }) => {
 
     }
 
+    const deletePayment = async (id) => {
+
+        try {
+
+            const dbDelResult = await (await fetch(`http://localhost:5000/api/payments/del/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-auth-token': localStorage.getItem('token')
+                }
+            })).json();
+
+            dispatch({
+                type: 'GET_USER_TRANSACTIONS#INIT'
+            });
+
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
     return (
         <GlobalContext.Provider value={{
             state,
@@ -117,6 +138,7 @@ export const GlobalProvider = ({ children }) => {
             registerUser,
             loginUser,
             logoutUser,
+            deletePayment,
 
             getUserTransactions
         }}>

@@ -21,12 +21,12 @@ const AppReducer = (state, action) => {
             return {
                 ...state,
                 userTransactions: [...action.payload],
-                transactionsInit: true
+                transactionsInit: !state.transactionsInit
             };
         case 'GET_USER_TRANSACTIONS#INIT':
             return {
                 ...state,
-                transactionsInit: false
+                transactionsInit: !state.transactionsInit
             }
 
         default:

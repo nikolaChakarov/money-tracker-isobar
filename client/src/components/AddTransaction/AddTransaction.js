@@ -69,6 +69,7 @@ const AddTransaction = () => {
                         name="name"
                         value={info.name}
                         onChange={onInputChange}
+                        required
                     />
                 </div>
 

@@ -35,10 +35,14 @@ const Transactions = () => {
         setBalance(res);
     }
 
+    const amountToStr = Math.abs(balance).toFixed(2);
+
     return (
         <section className="transactions">
-            <h1>Your Balance: {balance}</h1>
+            <h1>Your Balance: ${amountToStr}</h1>
+
             <h3>History of payments</h3>
+
             {state.userTransactions.map(el => (
                 <Transaction key={el._id} {...el} />
             ))}
