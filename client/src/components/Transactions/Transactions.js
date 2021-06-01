@@ -4,6 +4,9 @@ import { GlobalContext } from '../../context/GlobalState';
 import Transaction from '../Transaction/Transaction';
 import AddTransaction from '../AddTransaction/AddTransaction';
 
+import IsAuth from '../../middlewares/IsAuth';
+
+
 import './Transactions.css';
 
 const Transactions = () => {
@@ -53,4 +56,4 @@ const Transactions = () => {
 
 }
 
-export default Transactions;
+export default IsAuth(Transactions);

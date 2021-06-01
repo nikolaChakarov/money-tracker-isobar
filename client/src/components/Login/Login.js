@@ -1,6 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { GlobalContext } from '../../context/GlobalState';
 
+import IsNotAuth from '../../middlewares/IsNotAuth';
+
+
 import './Login.css';
 
 
@@ -69,6 +72,10 @@ const Login = ({ history }) => {
 
                 <button type="submit" className="btn login-btn">Login</button>
 
+                <div className="account-option">
+                    <p>You don't have an account... <a href="/register">Register</a></p>
+                </div>
+
             </form>
 
 
@@ -76,4 +83,4 @@ const Login = ({ history }) => {
     )
 }
 
-export default Login;
+export default IsNotAuth(Login);

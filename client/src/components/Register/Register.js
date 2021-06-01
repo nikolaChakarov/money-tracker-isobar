@@ -1,11 +1,13 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { GlobalContext } from '../../context/GlobalState';
+
+import IsNotAuth from '../../middlewares/IsNotAuth';
 
 import './Register.css';
 
 const Register = ({ history }) => {
 
-    const { registerUser } = useContext(GlobalContext);
+    const { registerUser, state } = useContext(GlobalContext);
 
     const [userData, setUserData] = useState({
         username: '',
@@ -13,7 +15,16 @@ const Register = ({ history }) => {
         password2: ''
     });
 
+
     const { username, password, password2 } = userData;
+
+    useEffect(() => {
+
+        if (state.username) {
+            history.push('/transactions');
+        }
+
+    }, [state.username]);
 
     const onInputChanged = (e) => {
 
@@ -32,7 +43,6 @@ const Register = ({ history }) => {
         }
 
         registerUser(userData);
-
     }
 
 
@@ -79,9 +89,15 @@ const Register = ({ history }) => {
 
                 <button type="submit" className="btn register-btn">Register</button>
 
+                <div className="account-option">
+                    <p>You already have an account... <a href="/login">Login</a></p>
+                </div>
+
             </form>
+
+
         </section>
     )
 }
 
-export default Register;
+export default IsNotAuth(Register);

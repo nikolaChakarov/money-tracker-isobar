@@ -25,3 +25,12 @@
 .register-section form input:focus {
     outline: none;
 }
+
+.account-option {
+    margin-top: 1rem;
+    text-align: right;
+}
+
+.account-option a {
+    color: var(--main-color)
+}
